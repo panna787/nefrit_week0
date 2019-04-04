@@ -6,14 +6,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ImdbFlow {
 
     public static void main(String[] args) throws Exception{
 
-        WebDriver driver = new ChromeDriver();
-        Actions builder = new Actions(driver);
+        WebDriver driver = new FirefoxDriver();
 
         //get main page
         driver.get("https://www.imdb.com/");
@@ -27,7 +27,8 @@ public class ImdbFlow {
         driver.findElement(By.id("signInSubmit")).click();
 
         //search
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("navbar-query")));
         driver.findElement(By.id("navbar-query")).sendKeys("shawshank");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"navbar-suggestionsearch\"]/div[1]/a")));
         driver.findElement(By.xpath("//*[@id=\"navbar-suggestionsearch\"]/div[1]/a")).click();
@@ -38,14 +39,23 @@ public class ImdbFlow {
         //navigate to watchlist
         driver.findElement(By.linkText("Watchlist")).click();
         driver.findElement(By.linkText("EDIT")).click();
+        //remove element from watchlist
+        /*driver.findElement(By.id("1489762812")).click();
+        driver.findElement(By.id("delete_items")).click();
+        driver.findElement(By.xpath("//*[@id=\"delete_items_form\"]/div/input")).click();*/
         //add element to watchlist with search
         driver.findElement(By.id("add-to-list-search")).sendKeys("submarine");
-
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"add-to-list-search-results\"]/a[1]")));
         driver.findElement(By.xpath("//*[@id=\"add-to-list-search-results\"]/a[1]")).click();
 
+        //sort watchlist
+        driver.findElement(By.linkText("Watchlist")).click();
+        Select dropDown = new Select(driver.findElement(By.id("lister-sort-by-options")));
+        dropDown.selectByValue("ALPHA");
+
+
         //close browser
         Thread.sleep(3000);
-        driver.close();
+        driver.quit();
     }
 }
