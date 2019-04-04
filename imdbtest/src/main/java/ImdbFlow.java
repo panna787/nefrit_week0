@@ -57,16 +57,25 @@ public class ImdbFlow {
 
         //Activities
         Actions action = new Actions(driver);
-        /*action.moveToElement(driver.findElement(By.id("nbusername"))).build().perform();
+        action.moveToElement(driver.findElement(By.id("nbusername"))).build().perform();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[1]/a")));
         driver.findElement(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[1]/a")).click();
-*/
+
         //Ratings
+        Thread.sleep(1000);
         action.moveToElement(driver.findElement(By.id("home_img"))).build().perform();
+        Thread.sleep(1000);
         action.moveToElement(driver.findElement(By.id("nbusername"))).build().perform();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[3]/a")));
         driver.findElement(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[3]/a")).click();
 
+        //logout
+        Thread.sleep(1000);
+        action.moveToElement(driver.findElement(By.id("home_img"))).build().perform();
+        Thread.sleep(1000);
+        action.moveToElement(driver.findElement(By.id("nbusername"))).build().perform();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nblogout")));
+        driver.findElement(By.id("nblogout")).click();
 
         //close browser
         Thread.sleep(3000);
