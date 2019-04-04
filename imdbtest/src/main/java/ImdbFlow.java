@@ -32,10 +32,14 @@ public class ImdbFlow {
         driver.findElement(By.xpath("//*[@id=\"navbar-suggestionsearch\"]/div[1]/a")).click();
 
         //navigate to watchlist
-        /*driver.findElement(By.linkText("Watchlist")).click();
-        driver.findElement(By.xpath("//*[@id=\"center-1-react\"]/div/div[1]/div/div[1]/a))")).click();
+        driver.findElement(By.linkText("Watchlist")).click();
+        driver.findElement(By.linkText("EDIT")).click();
+        //add element to watchlist with search
+        driver.findElement(By.id("add-to-list-search")).sendKeys("shawshank");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"add-to-list-search-results\"]/a[1]")));
+        driver.findElement(By.xpath("//*[@id=\"add-to-list-search-results\"]/a[1]")).click();
 
-        driver.findElement(By.id("add-to-list-search")).sendKeys("shawshank");*/
+        //close
         Thread.sleep(3000);
         driver.close();
     }
