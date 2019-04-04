@@ -28,7 +28,7 @@ public class ImdbFlow {
 
         //search
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("navbar-query")));
+        /*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("navbar-query")));
         driver.findElement(By.id("navbar-query")).sendKeys("shawshank");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"navbar-suggestionsearch\"]/div[1]/a")));
         driver.findElement(By.xpath("//*[@id=\"navbar-suggestionsearch\"]/div[1]/a")).click();
@@ -40,9 +40,9 @@ public class ImdbFlow {
         driver.findElement(By.linkText("Watchlist")).click();
         driver.findElement(By.linkText("EDIT")).click();
         //remove element from watchlist
-        /*driver.findElement(By.id("1489762812")).click();
+        driver.findElement(By.id("1489762812")).click();
         driver.findElement(By.id("delete_items")).click();
-        driver.findElement(By.xpath("//*[@id=\"delete_items_form\"]/div/input")).click();*/
+        driver.findElement(By.xpath("//*[@id=\"delete_items_form\"]/div/input")).click();
         //add element to watchlist with search
         driver.findElement(By.id("add-to-list-search")).sendKeys("submarine");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"add-to-list-search-results\"]/a[1]")));
@@ -51,7 +51,13 @@ public class ImdbFlow {
         //sort watchlist
         driver.findElement(By.linkText("Watchlist")).click();
         Select dropDown = new Select(driver.findElement(By.id("lister-sort-by-options")));
-        dropDown.selectByValue("ALPHA");
+        dropDown.selectByValue("ALPHA");*/
+
+        //Activities
+        Actions action = new Actions(driver);
+        action.moveToElement(driver.findElement(By.id("nbusername"))).build().perform();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[1]/a")));
+        driver.findElement(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[1]/a")).click();
 
 
         //close browser
