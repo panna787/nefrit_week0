@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public class ImdbFlow {
 
     public static void main(String[] args) throws Exception{
@@ -55,9 +57,15 @@ public class ImdbFlow {
 
         //Activities
         Actions action = new Actions(driver);
-        action.moveToElement(driver.findElement(By.id("nbusername"))).build().perform();
+        /*action.moveToElement(driver.findElement(By.id("nbusername"))).build().perform();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[1]/a")));
         driver.findElement(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[1]/a")).click();
+*/
+        //Ratings
+        action.moveToElement(driver.findElement(By.id("home_img"))).build().perform();
+        action.moveToElement(driver.findElement(By.id("nbusername"))).build().perform();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[3]/a")));
+        driver.findElement(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[3]/a")).click();
 
 
         //close browser
