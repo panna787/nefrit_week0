@@ -8,13 +8,19 @@ public class App {
 
     static WebDriverWait wait;
 
-    public static void waitForElementToBeVisible(WebDriver driver, WebElement element){
+    public static WebElement waitForElementToBeVisible(WebDriver driver, WebElement element){
         wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOf(element));
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static void waitForElementToBeClickable(WebDriver driver, WebElement element){
+    public static WebElement waitForElementToBeClickable(WebDriver driver, WebElement element){
         wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+        return wait.until(ExpectedConditions.elementToBeClickable(element));
+
+    }
+
+    public static void closeBrowser(WebDriver driver){
+        driver.manage().deleteAllCookies();
+        driver.close();
     }
 }
