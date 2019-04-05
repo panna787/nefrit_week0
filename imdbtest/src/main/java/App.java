@@ -8,6 +8,15 @@ public class App {
 
     static WebDriverWait wait;
 
+    public static void startSession(WebDriver driver){
+        driver.manage().window().maximize();
+        driver.manage().deleteAllCookies();
+    }
+
+    public static void getMainPage(WebDriver driver){
+        driver.get("https://www.imdb.com/");
+    }
+
     public static WebElement waitForElementToBeVisible(WebDriver driver, WebElement element){
         wait = new WebDriverWait(driver, 10);
         return wait.until(ExpectedConditions.visibilityOf(element));

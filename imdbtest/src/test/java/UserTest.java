@@ -28,6 +28,24 @@ public class UserTest {
     public void signIn_WithValidEmailAndPassword(){
         User.signIn(driver, "aniko.majoros87@gmail.com", "imdbpassword");
         assertEquals("panna787", driver.findElement(By.id("nbusername")).getText());
+        User.logout(driver, actions);
+    }
+
+    @Test
+    public void signIn_WithValidEmailAndInvalidPassword(){
+        User.signIn(driver, "aniko.majoros87@gmail.com", "something");
+        assertEquals("Your password is incorrect", driver.findElement(By.xpath("//*[@id=\"auth-error-message-box\"]/div/div/ul/li/span")).getText());
+    }
+
+    @Test
+    public void signIn_WithInvalidEmailAndValidPassword(){
+        User.signIn(driver, "something_notemail", "imdbpassword");
+        assertEquals("We cannot find an account with that email address", driver.findElement(By.xpath("//*[@id=\"auth-error-message-box\"]/div/div/ul/li/span")).getText());
+    }
+
+    @Test
+    public void signIn_WithEmptyInputFields(){
+        //driver.findElements(By.xpath("//*[@id=\"auth-error-message-box\"]/div/div/dl"));
     }
 
     @AfterClass

@@ -7,17 +7,27 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class User {
 
-    public static void signIn(WebDriver driver){
+    public static void signIn(WebDriver driver, String email, String password){
         driver.findElement(By.id("imdb-signin-link")).click();
         driver.findElement(By.linkText("Sign in with IMDb")).click();
-        driver.findElement(By.id("ap_email")).sendKeys("aniko.majoros87@gmail.com");
-        driver.findElement(By.id("ap_password")).sendKeys("imdbpassword");
+        driver.findElement(By.id("ap_email")).sendKeys(email);
+        driver.findElement(By.id("ap_password")).sendKeys(password);
         driver.findElement(By.id("signInSubmit")).click();
     }
 
-    public static void logOut(WebDriver driver, Actions action){
-        action.moveToElement(driver.findElement(By.id("navUserMenu"))).build().perform();
-        App.waitForElementToBeVisible(driver, driver.findElement(By.id("nblogout")));
-        driver.findElement(By.id("nblogout")).click();
+    public static void navigateToActivity(WebDriver driver, Actions actions){
+        WebElement userMenu = driver.findElement(By.id("navUserMenu"));
+        actions.moveToElement(userMenu).build().perform();
+        WebElement activityLink = driver.findElement(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[1]/a"));
+        App.waitForElementToBeVisible(driver, activityLink);
+        App.waitForElementToBeClickable(driver, activityLink).click();
+    }
+
+    public static void logout(WebDriver driver, Actions action){
+        WebElement userMenu = driver.findElement(By.id("navUserMenu"));
+        action.moveToElement(userMenu).build().perform();
+        WebElement logout = driver.findElement(By.id("nblogout"));
+        App.waitForElementToBeVisible(driver, logout);
+        App.waitForElementToBeClickable(driver, logout).click();
     }
 }
