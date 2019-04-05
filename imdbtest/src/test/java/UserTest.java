@@ -1,6 +1,10 @@
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -16,8 +20,14 @@ public class UserTest {
     }
 
     @Before
-    public static void getMainPage(){
+    public void getMainPage(){
         App.getMainPage(driver);
+    }
+
+    @Test
+    public void signIn_WithValidEmailAndPassword(){
+        User.signIn(driver, "aniko.majoros87@gmail.com", "imdbpassword");
+        assertEquals("panna787", driver.findElement(By.id("nbusername")).getText());
     }
 
     @AfterClass
