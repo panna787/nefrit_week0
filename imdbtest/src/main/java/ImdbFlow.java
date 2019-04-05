@@ -22,18 +22,19 @@ public class ImdbFlow {
         driver.manage().window().maximize();
 
         //sign in
-        driver.findElement(By.id("imdb-signin-link")).click();
+        /*driver.findElement(By.id("imdb-signin-link")).click();
         driver.findElement(By.linkText("Sign in with IMDb")).click();
         driver.findElement(By.id("ap_email")).sendKeys("aniko.majoros87@gmail.com");
         driver.findElement(By.id("ap_password")).sendKeys("imdbpassword");
-        driver.findElement(By.id("signInSubmit")).click();
+        driver.findElement(By.id("signInSubmit")).click();*/
 
         //search
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        /*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("navbar-query")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("navbar-query")));
         driver.findElement(By.id("navbar-query")).sendKeys("shawshank");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"navbar-suggestionsearch\"]/div[1]/a")));
         driver.findElement(By.xpath("//*[@id=\"navbar-suggestionsearch\"]/div[1]/a")).click();
+
         //add search result to watchlist
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"title-overview-widget\"]/div[2]/div[2]/span/div")));
         driver.findElement(By.xpath("//*[@id=\"title-overview-widget\"]/div[2]/div[2]/span/div")).click();
@@ -41,10 +42,13 @@ public class ImdbFlow {
         //navigate to watchlist
         driver.findElement(By.linkText("Watchlist")).click();
         driver.findElement(By.linkText("EDIT")).click();
-        //remove element from watchlist
+
+        /*//remove element from watchlist
         driver.findElement(By.id("1489762812")).click();
         driver.findElement(By.id("delete_items")).click();
         driver.findElement(By.xpath("//*[@id=\"delete_items_form\"]/div/input")).click();
+        */
+
         //add element to watchlist with search
         driver.findElement(By.id("add-to-list-search")).sendKeys("submarine");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"add-to-list-search-results\"]/a[1]")));
@@ -53,27 +57,27 @@ public class ImdbFlow {
         //sort watchlist
         driver.findElement(By.linkText("Watchlist")).click();
         Select dropDown = new Select(driver.findElement(By.id("lister-sort-by-options")));
-        dropDown.selectByValue("ALPHA");*/
+        dropDown.selectByValue("ALPHA");
 
         //Activities
         Actions action = new Actions(driver);
-        action.moveToElement(driver.findElement(By.id("nbusername"))).build().perform();
+        action.moveToElement(driver.findElement(By.id("navUserMenu"))).build().perform();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[1]/a")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[1]/a")));
         driver.findElement(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[1]/a")).click();
 
         //Ratings
         Thread.sleep(1000);
-        action.moveToElement(driver.findElement(By.id("home_img"))).build().perform();
-        Thread.sleep(1000);
-        action.moveToElement(driver.findElement(By.id("nbusername"))).build().perform();
+        action.moveToElement(driver.findElement(By.id("navUserMenu"))).build().perform();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[3]/a")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[3]/a")));
         driver.findElement(By.xpath("//*[@id=\"navUserMenu\"]/div/div[2]/ul/li[3]/a")).click();
 
         //logout
         Thread.sleep(1000);
         action.moveToElement(driver.findElement(By.id("home_img"))).build().perform();
         Thread.sleep(1000);
-        action.moveToElement(driver.findElement(By.id("nbusername"))).build().perform();
+        action.moveToElement(driver.findElement(By.id("navUserMenu"))).build().perform();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nblogout")));
         driver.findElement(By.id("nblogout")).click();
 
