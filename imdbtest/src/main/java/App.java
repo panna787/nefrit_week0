@@ -10,10 +10,10 @@ public class App {
 
     public static void startSession(WebDriver driver){
         driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
     }
 
     public static void getMainPage(WebDriver driver){
+        driver.manage().deleteAllCookies();
         driver.get("https://www.imdb.com/");
     }
 

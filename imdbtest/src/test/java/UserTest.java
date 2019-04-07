@@ -6,8 +6,12 @@ import static org.junit.Assert.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserTest {
 
@@ -45,7 +49,15 @@ public class UserTest {
 
     @Test
     public void signIn_WithEmptyInputFields(){
-        //driver.findElements(By.xpath("//*[@id=\"auth-error-message-box\"]/div/div/dl"));
+        WebElement signInButton = driver.findElement(By.id("imdb-signin-link"));
+        App.waitForElementToBeClickable(driver, signInButton);
+        User.signIn(driver, "", "");
+        List<String> messages = driver.findElements(By.xpath("//*[@id=\"auth-error-message-box\"]/div/div/dl"))
+                .stream().map(e -> e.getText()).collect(Collectors.toList());
+        System.out.println(messages.get(0));
+        assertEquals("Enter your email\n" +  "Enter your password", messages.get(0));
+
+
     }
 
     @AfterClass

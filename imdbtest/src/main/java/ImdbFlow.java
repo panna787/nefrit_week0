@@ -9,7 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class ImdbFlow {
 
@@ -21,6 +23,10 @@ public class ImdbFlow {
         driver.get("https://www.imdb.com/");
         driver.manage().window().maximize();
 
+        List<String> messages = driver.findElements(By.xpath("//*[@id=\"auth-error-message-box\"]/div/div/dl"))
+                .stream().map(e -> e.getText()).collect(Collectors.toList());
+        System.out.println(messages.get(0));
+
         //sign in
         /*driver.findElement(By.id("imdb-signin-link")).click();
         driver.findElement(By.linkText("Sign in with IMDb")).click();
@@ -29,20 +35,20 @@ public class ImdbFlow {
         driver.findElement(By.id("signInSubmit")).click();*/
 
         //search
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        /*WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("navbar-query")));
         driver.findElement(By.id("navbar-query")).sendKeys("shawshank");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"navbar-suggestionsearch\"]/div[1]/a")));
-        driver.findElement(By.xpath("//*[@id=\"navbar-suggestionsearch\"]/div[1]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"navbar-suggestionsearch\"]/div[1]/a")).click();*/
 
         //add search result to watchlist
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"title-overview-widget\"]/div[2]/div[2]/span/div")));
+        /*wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"title-overview-widget\"]/div[2]/div[2]/span/div")));
         driver.findElement(By.xpath("//*[@id=\"title-overview-widget\"]/div[2]/div[2]/span/div")).click();
-
+*/
         //navigate to watchlist
-        driver.findElement(By.linkText("Watchlist")).click();
+        /*driver.findElement(By.linkText("Watchlist")).click();
         driver.findElement(By.linkText("EDIT")).click();
-
+*/
         /*//remove element from watchlist
         driver.findElement(By.id("1489762812")).click();
         driver.findElement(By.id("delete_items")).click();
@@ -50,7 +56,7 @@ public class ImdbFlow {
         */
 
         //add element to watchlist with search
-        driver.findElement(By.id("add-to-list-search")).sendKeys("submarine");
+        /*driver.findElement(By.id("add-to-list-search")).sendKeys("submarine");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"add-to-list-search-results\"]/a[1]")));
         driver.findElement(By.xpath("//*[@id=\"add-to-list-search-results\"]/a[1]")).click();
 
@@ -83,6 +89,6 @@ public class ImdbFlow {
 
         //close browser
         Thread.sleep(3000);
-        driver.quit();
+        driver.quit();*/
     }
 }
